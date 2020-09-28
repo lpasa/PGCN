@@ -5,29 +5,29 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
 
 import torch
 
-from model.PGC_GNN_A import PGC_GNN
+from model.PGC_GNN_L import PGC_GNN
 from impl.binGraphClassifier import modelImplementation_GraphBinClassifier
 from utils.utils import printParOnFile
 from data_reader.cross_validation_reader import getcross_validation_split
 
 if __name__ == '__main__':
 
-    n_epochs = 200
+    n_epochs = 300
     n_classes = 2
-    dataset_path = '~/Dataset/DD'
-    dataset_name = 'DD'
-    n_folds = 10
+    dataset_path = '~/Dataset/IMDB-BINARY'
+    dataset_name = 'IMDB-BINARY'
     test_epoch = 1
+    n_folds = 10
 
-    #GRID parameter sets
     n_unit_list = [50, 75]
-    lr_list = [5e-4, 5e-5]
-    weight_decay_list = [5e-3, 5e-4]
-    drop_prob_list = [0.3,0.5]
+    lr_list = [0.00001,0.0001]
+    weight_decay_list = [5e-4,5e-5]
+    drop_prob_list = [0, 0.5]
     batch_size_list = [16, 32]
-    max_k_list=[3,4,5,6]
+    max_k_list = [3,5,7,9]
     output_list = ["funnel", "restricted_funnel"]
 
+    
     for n_units in n_unit_list:
         for lr in lr_list:
             for drop_prob in drop_prob_list:
@@ -38,9 +38,10 @@ if __name__ == '__main__':
 
                                 test_name = "PGC_GNN"
 
-                                test_name = test_name + "_data-" + dataset_name  + "_nFold-" + str(n_folds) + "_lr-" + \
-                                            str(lr) +"_drop_prob-"+str(drop_prob)+"_weight-decay-"+ str(weight_decay)+\
-                                            "_batchSize-" + str(batch_size) + "_nHidden-" + str(n_units)  + "_output-" +\
+                                test_name = test_name + "_data-" + dataset_name + "_nFold-" + str(n_folds) + "_lr-" + \
+                                            str(lr) + "_drop_prob-" + str(drop_prob) + "_weight-decay-" + str(
+                                    weight_decay) + \
+                                            "_batchSize-" + str(batch_size) + "_nHidden-" + str(n_units) + "_output-" + \
                                             str(output) + "_maxK-" + str(max_k)
                                 training_log_dir = os.path.join("./test_log/", test_name)
                                 if not os.path.exists(training_log_dir):
@@ -80,3 +81,7 @@ if __name__ == '__main__':
 
                                     model_impl.train_test_model(split_id, loader_train, loader_test, loader_valid,
                                                                 n_epochs, test_epoch, test_name, training_log_dir)
+
+
+
+

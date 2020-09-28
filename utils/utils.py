@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+import torch
 from torch_geometric.utils.convert import to_networkx
 from networkx.algorithms.distance_measures import diameter
 from networkx.algorithms.components import connected_components
@@ -37,4 +38,8 @@ def get_graph_diameter(data):
     for sub_g in sub_graph_list:
         sub_graph_diam.append(diameter(sub_g))
     data.diameter=max(sub_graph_diam)
+
+    if data.x is None:
+        data.x = torch.ones(data.num_nodes, 1)
+
     return data

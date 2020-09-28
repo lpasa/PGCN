@@ -5,7 +5,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
 
 import torch
 
-from model.PGC_GNN import PGC_GNN
+from model.PGC_GNN_A import PGC_GNN
 from impl.binGraphClassifier import modelImplementation_GraphBinClassifier
 from utils.utils import printParOnFile
 from data_reader.cross_validation_reader import getcross_validation_split
