@@ -32,6 +32,7 @@ class PGC_GNN(torch.nn.Module):
         self.output = output
         self.k = k
         self.dropout = torch.nn.Dropout(p=drop_prob)
+        self.device=device
 
         # first layer conv
         self.conv0 = GraphConv(self.in_channels, self.input_proj_dim)

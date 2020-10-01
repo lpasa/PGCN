@@ -20,7 +20,7 @@ if __name__ == '__main__':
     test_epoch = 1
 
 
-    n_units_list = [7,15,30]
+    n_unit_list = [7,15,30]
     lr_list = [0.001,0.0005]
     weight_decay_list = [5e-3,5e-4]
     drop_prob_list = [0, 0.5]
@@ -29,7 +29,7 @@ if __name__ == '__main__':
     output_list = ["funnel", "restricted_funnel"]
 
 
-    for n_units in n_units_list:
+    for n_units in n_unit_list:
         for lr in lr_list:
             for drop_prob in drop_prob_list:
                 for weight_decay in weight_decay_list:
@@ -37,15 +37,9 @@ if __name__ == '__main__':
                         for output in output_list:
                             for max_k in max_k_list:
 
-                                test_name=PGC_GNN
+                                test_name = "PGC_GNN"
 
-                                test_name = test_name + "_data-" + dataset_name + "_nFold-" + str(
-                                    n_folds) + "_lr-" + \
-                                            str(lr) + "_drop_prob-" + str(drop_prob) + "_weight-decay-" + str(
-                                    weight_decay) + \
-                                            "_batchSize-" + str(batch_size) + "_nHidden-" + str(
-                                    n_units) + "_output-" + \
-                                            str(output) + "_maxK-" + str(max_k)
+                                test_name = test_name + "_data-" + dataset_name + "_nFold-" + str(n_folds) + "_lr-" + str(lr) + "_drop_prob-" + str(drop_prob) + "_weight-decay-" + str(weight_decay) + "_batchSize-" + str(batch_size) + "_nHidden-" + str(n_units) + "_output-" + str(output) + "_maxK-" + str(max_k)
                                 training_log_dir = os.path.join("./test_log/", test_name)
                                 if not os.path.exists(training_log_dir):
                                     os.makedirs(training_log_dir)

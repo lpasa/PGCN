@@ -20,7 +20,7 @@ if __name__ == '__main__':
     n_folds = 10
 
     n_unit_list = [50, 75]
-    lr_list = [0.00001,0.0001]
+    lr_list = [0.0001,0.00001]
     weight_decay_list = [5e-4,5e-5]
     drop_prob_list = [0, 0.5]
     batch_size_list = [16, 32]
