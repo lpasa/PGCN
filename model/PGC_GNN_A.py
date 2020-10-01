@@ -23,6 +23,10 @@ class PGC_GNN(torch.nn.Module):
         :param device: device [CPU, GPU]
         '''
         super(PGC_GNN, self).__init__()
+        if device is None:
+            self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        else:
+            self.device = device
 
 
         self.in_channels = in_channels
@@ -32,7 +36,6 @@ class PGC_GNN(torch.nn.Module):
         self.output = output
         self.k = k
         self.dropout = torch.nn.Dropout(p=drop_prob)
-        self.device=device
 
         # first layer conv
         self.conv0 = GraphConv(self.in_channels, self.input_proj_dim)
